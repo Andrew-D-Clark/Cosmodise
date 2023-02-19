@@ -2,6 +2,7 @@
 
 
 #include "Flyer_Base.h"
+#include "CosmoAttributeComponent.h"
 
 // Sets default values
 AFlyer_Base::AFlyer_Base()
@@ -112,5 +113,5 @@ void AFlyer_Base::OnHealthChanged(AActor* InstigatorActor, UCosmoAttributeCompon
 
 void AFlyer_Base::PostInitializeComponents()
 {
-
+	Super::PostInitializeComponents();
 }
