@@ -108,7 +108,20 @@ void AFlyer_Base::ProcessThrust(float Rate)
 
 void AFlyer_Base::OnHealthChanged(AActor* InstigatorActor, UCosmoAttributeComponent* OwningComp, float NewHealth, float Delta)
 {
+	// Damaged
+	if (Delta < 0.0f)
+	{
+		GetMesh()->SetScalarParameterValueOnMaterials(TimeToHitParamName, GetWorld()->TimeSeconds);
+	}
 
+	// Died
+	if (NewHealth <= 0.0f && Delta < 0.0f)
+	{
+		APlayerController* PC = Cast<APlayerController>(GetController());
+		DisableInput(PC);
+
+		SetLifeSpan(5.0f);
+	}
 }
 
 void AFlyer_Base::PostInitializeComponents()
